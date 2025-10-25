@@ -31,7 +31,7 @@ int main(int argc, char** argv){
         int mon_Code;
         wait(&mon_Code);
         if (mon_Code==0){
-            printf("table crée avec succès \n");
+            printf("table créée avec succès \n");
             return EXIT_SUCCESS;
         }
         else

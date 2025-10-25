@@ -13,6 +13,12 @@ preparerTable.exe : preparerTable.o
 preparerTable.o : preparerTable.c
 	gcc ${opt} preparerTable.c
 
+reinitialiserTable.exe : reinitialiserTable.o 
+	gcc -o reinitialiserTable.exe reinitialiserTable.o
+
+reinitialiserTable.o : reinitialiserTable.c
+	gcc ${opt} reinitialiserTable.c
+
 supprimerTable.exe : supprimerTable.o
 	gcc -o supprimerTable.exe supprimerTable.o
 

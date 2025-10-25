@@ -50,7 +50,7 @@ int main(int argc, char** argv){
                     fclose(fich);
                 }else{
                     printf("echec de la préparation de la table\n");
-                    return mon_Code;
+                    return mon_Code2;
                 }
             }
             return mon_Code;  
