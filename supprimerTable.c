@@ -30,6 +30,8 @@ int main(int argc, char** argv){
         if (mon_pid == 0){
             char* mes_params[]={"cp","-r",argv[1],(char*)NULL};
             execv("/usr/bin/rm",mes_params);
+            /*dans le cas ou execv ne s'exécute pas j'affiche un message dans la sortie approprié*/
+            fprintf(stderr,"la commande de création de dossier MKDIR n'a pas réussie à s'exécuter correctement");
             return(EXIT_FAILURE);
 
         }
