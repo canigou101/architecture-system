@@ -12,22 +12,27 @@ int main(int argc, char** argv){
         fprintf(stderr,"usage : \n\t%s REPERTOIRE\n", argv[0] );
         exit(EXIT_FAILURE);
     }
+
+
     /*vérification de la présence ou non du dossier*/
     struct stat stats;
     char *chemin_du_repertoir =argv[1];
     int resultat=stat(chemin_du_repertoir,&stats);
     /*verification du résultat retourné par stat() ->0 = existe ->1 = n'existe pas*/
+    
+    
     if(resultat==0 && S_ISDIR(stats.st_mode)){
         fprintf(stderr,"le répertoire existe deja essayez un autre nom");
-        exit(EXIT_FAILURE);
+        return(EXIT_FAILURE);
     }
     /*pas besoin d'un else car on cherche juste à savoir s'il existe pour couper le programme en affichant une erreur*/
-    pid_t mon_pid = fork();
     
-
+    
+    
+    pid_t mon_pid = fork();
     /*création d'un processus pour faire la création de la table/dossier*/
     if(mon_pid <0 ){
-        perror("impossible de creer un processus \n");
+        fprintf(stderr,"impossible de creer un processus \n");
         return(EXIT_FAILURE);
     }
     
@@ -36,6 +41,8 @@ int main(int argc, char** argv){
     if (mon_pid == 0){
         char* mes_params[]={"mkdir",argv[1],(char*)NULL};
         execv("/usr/bin/mkdir",mes_params);
+        /*dans le cas ou execv ne s'exécute pas j'affiche un message dans la sortie approprié*/
+        fprintf(stderr,"la commande de création de dossier MKDIR n'a pas réussie à s'exécuter correctement");
         return(EXIT_FAILURE);
 
     }
@@ -49,7 +56,7 @@ int main(int argc, char** argv){
         }
         else
         {
-            printf("echec de la création de la table\n");
+            fprintf(stderr,"echec de la création de la table\n");
             return mon_Code;
         }     
     }

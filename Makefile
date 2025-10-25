@@ -1,5 +1,13 @@
-opt = -c -Wall -Wextra
+opt = -c -Wall -Wextra -std=c99
 
+all: 
+	make clean
+	make cleanEXE
+	make creerTable.exe
+	make supprimerTable.exe
+	make preparerTable.exe
+	make reinitialiserTable.exe
+	make clean
 
 creerTable.exe : creerTable.o 
 	gcc -o creerTable.exe creerTable.o
