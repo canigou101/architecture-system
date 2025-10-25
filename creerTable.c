@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
-
-
-   
+/*utilisation de la biblio sys/stat.h*/
+#include <sys/stat.h>
     
 
 int main(int argc, char** argv){
@@ -13,12 +12,26 @@ int main(int argc, char** argv){
         fprintf(stderr,"usage : \n\t%s REPERTOIRE\n", argv[0] );
         exit(EXIT_FAILURE);
     }
+    /*vérification de la présence ou non du dossier*/
+    struct stat stats;
+    char *chemin_du_repertoir =argv[1];
+    int resultat=stat(chemin_du_repertoir,&stats);
+    /*verification du résultat retourné par stat() ->0 = existe ->1 = n'existe pas*/
+    if(resultat==0 && S_ISDIR(stats.st_mode)){
+        fprintf(stderr,"le répertoire existe deja essayez un autre nom");
+        exit(EXIT_FAILURE);
+    }
+    /*pas besoin d'un else car on cherche juste à savoir s'il existe pour couper le programme en affichant une erreur*/
     pid_t mon_pid = fork();
+    
+
     /*création d'un processus pour faire la création de la table/dossier*/
     if(mon_pid <0 ){
         perror("impossible de creer un processus \n");
         return(EXIT_FAILURE);
     }
+    
+    
     /*si le pid est égale à 0 on est alors dans le fils. donc on execute la commande mkdir pour make directory avec le parametre donné*/
     if (mon_pid == 0){
         char* mes_params[]={"mkdir",argv[1],(char*)NULL};
