@@ -1,4 +1,4 @@
-opt = -c -Wall -Wextra
+opt = -c -Wall -Wextra -std=c99
 
 
 creerTable.exe : creerTable.o 

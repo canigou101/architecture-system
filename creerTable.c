@@ -12,6 +12,8 @@ int main(int argc, char** argv){
         fprintf(stderr,"usage : \n\t%s REPERTOIRE\n", argv[0] );
         exit(EXIT_FAILURE);
     }
+
+
     /*vérification de la présence ou non du dossier*/
     struct stat stats;
     char *chemin_du_repertoir =argv[1];
@@ -22,9 +24,10 @@ int main(int argc, char** argv){
         exit(EXIT_FAILURE);
     }
     /*pas besoin d'un else car on cherche juste à savoir s'il existe pour couper le programme en affichant une erreur*/
-    pid_t mon_pid = fork();
     
-
+    
+    
+    pid_t mon_pid = fork();
     /*création d'un processus pour faire la création de la table/dossier*/
     if(mon_pid <0 ){
         perror("impossible de creer un processus \n");
