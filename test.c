@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+
+/*il sert à quoi ce fichier ?*/
 int main(int argc, char** argv){
     if (argc!=2) {
         fprintf(stderr,"usage : \n\t%s REPERTOIRE\n", argv[0] );
