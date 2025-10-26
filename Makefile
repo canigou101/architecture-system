@@ -33,11 +33,23 @@ supprimerTable.exe : supprimerTable.o
 supprimerTable.o : supprimerTable.c 
 	gcc ${opt} supprimerTable.c 
 
+controlerType.exe : controlerType.o
+	gcc -o controlerType.exe controlerType.o 
+
+controlerType.o : controlerType.c
+	gcc ${opt} controlerType.c
+
 test.exe : test.o
 	gcc -o test.exe test.o 
 
-test.o : test.c
-	gcc ${opt} test.c
+test.o : test.c structMeta.h
+	gcc ${opt} test.c structMeta.h
+
+test2.exe : test2.o 
+	gcc -o test2.exe test2.o
+
+test2.o : test2.c
+	gcc ${opt} test2.c
 
 clean :
 	rm -rf *.o 
