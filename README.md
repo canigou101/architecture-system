@@ -42,7 +42,7 @@ Mode d'emploi :
 
 
     Compilation :
-                 tapez make <Le_Nom_De_La_Commande>
+                 entrer make <Le_Nom_De_La_Commande>
                  exemple:
                  make creerTable.exe
     Compiler toutes les commandes en une seule fois :
@@ -50,7 +50,7 @@ Mode d'emploi :
     
     exécution d'une commande :
 
-        Dans le terminal, tapez :
+        Dans le terminal, entrer :
 
              ./<Nom_De_La_Commande> <Paramètre_De_La_Commande>
                      exemple :
