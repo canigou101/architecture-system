@@ -23,19 +23,21 @@ int main(int argc, char** argv){
         wait(&mon_Code);
         if (mon_Code==0){
             /*Si le fichier meta existe déjà, arrêt du programme*/
-            printf("La table est déjà préparée, si vous voulez la changer, veuillez lancer une réinitialisation. \n");
+            fprintf(stderr,"La table est déjà préparée, si vous voulez la changer, veuillez lancer une réinitialisation. \n");
             return EXIT_FAILURE;
         }
         else{
             /*Si le fichier meta n'existe pas, il est créé*/
             pid_t mon_pid2 = fork();
             if(mon_pid2<0){
-                perror("Le processus ne s'est pas lancé. \n");
+                fprintf(stderr,"Le processus ne s'est pas lancé. \n");
                 return(EXIT_FAILURE);
             }else if(mon_pid2==0){
                 /*Création du fichier meta*/
                 char* mesParam2[]= {"touch", nomFichier};
                 execv("/usr/bin/touch",mesParam2);
+                fprintf(stderr,"la commande touch ne s'est pas executée");
+                exit(EXIT_FAILURE);
             }else{
                 /*Si le fichier est créé avec succès, le programme demande à l'utilisateur d'entrer les données voulues*/
                 int mon_Code2;
@@ -46,7 +48,7 @@ int main(int argc, char** argv){
                     scanf("%d",&nbC);
                     fprintf(fich,"%d", nbC);
                     for(int i = 0;i<nbC;i++){
-                        printf("Quelle est la taille de la %de colonne? ", i+1);
+                        printf("Quel est le code de la %de colonne? ", i+1);
                         scanf("%d",&tC);
                         char nomC[sizeof(tC)];
                         printf("Quelle est son nom? ");
@@ -56,7 +58,7 @@ int main(int argc, char** argv){
                     fclose(fich);
                 }else{
                     /*En cas d'échec de la commande touch*/
-                    printf("echec de la préparation de la table\n");
+                    fprintf(stderr,"echec de la préparation de la table\n");
                     return mon_Code2;
                 }
             }

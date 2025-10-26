@@ -55,3 +55,7 @@ clean :
 	rm -rf *.o 
 cleanEXE :
 	rm -rf *.exe 
+
+cleanALL: 
+	make clean
+	make cleanEXE

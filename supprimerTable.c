@@ -23,7 +23,7 @@ int main(int argc, char** argv){
         /*création d'un processus pour faire la suppression de la table/dossier*/
         pid_t mon_pid = fork();
         if(mon_pid <0 ){
-            perror("impossible de créer un processus \n");
+            fprintf(stderr,"impossible de créer un processus \n");
             return(EXIT_FAILURE);
         }
         /*si le pid est égale à 0 on est alors dans le fils. donc on execute la commande rm pour remove avec le parametre donné*/
@@ -45,7 +45,7 @@ int main(int argc, char** argv){
             }
             else
             {
-                printf("suppression échoué\n");
+                fprintf(stderr,"suppression échoué\n");
                 return mon_Code;
             }     
         }

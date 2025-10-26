@@ -27,10 +27,10 @@ int main(int argc, char** argv){
                 int mon_Code2;
                 wait(&mon_Code2);
                 if (mon_Code2==0){ /*vérification de la création de la table*/
-                    printf("La table a été réinitialisée avec succès. \n");
+                    fprintf(stderr,"La table a été réinitialisée avec succès. \n");
                     return EXIT_SUCCESS;
                 }else{
-                    printf("Echec de la réinitialisation de la table\n");
+                    fprintf(stderr,"Echec de la réinitialisation de la table\n");
                     return mon_Code2;
                 }
             }
