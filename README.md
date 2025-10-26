@@ -16,8 +16,11 @@ Commandes disponibles :
      
     réinitialiserTable.exe <Nom_De_Table> | elle permet de supprimer les fichiers data et meta d'une table /!\ Cette commande utilise la commande supprimerTable.exe, donc elle supprime tous les fichiers de la table, avant de la recréer.
  
-       inserer_table.exe <Nom_De_Table> | elle remplit le fichier data d'une table donnée en paramètre. La commande est sensible au type énoncé dans le fichier meta.
-      listerTable.exe <Nom_De_Table> | elle affiche toutes les lignes d'un fichier data en y précisant son type.
+    inserer_table.exe <Nom_De_Table> | elle remplit le fichier data d'une table donnée en paramètre. La commande est sensible au type énoncé dans le fichier meta.
+    
+    listerTable.exe <Nom_De_Table> | elle affiche toutes les lignes d'un fichier data en y précisant son type.
+    
+    
 
 
 Technologies employées :
@@ -43,10 +46,13 @@ Mode d'emploi :
 
     Compilation :
                  tapez make <Le_Nom_De_La_Commande>
-                 exemple:
-                 make creerTable.exe
+                 
+                exemple:
+                make creerTable.exe
+
     Compiler toutes les commandes en une seule fois :
-      make all        
+    
+    make all        
     
     exécution d'une commande :
 

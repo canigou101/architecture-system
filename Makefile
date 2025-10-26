@@ -7,7 +7,14 @@ all:
 	make supprimerTable.exe
 	make preparerTable.exe
 	make reinitialiserTable.exe
+	make listerTable.exe
 	make clean
+
+listerTable.exe: listerTable.o
+	gcc -o listerTable.exe listerTable.o
+
+listerTable.o : listerTable.c
+	gcc ${opt} listerTable.c
 
 creerTable.exe : creerTable.o 
 	gcc -o creerTable.exe creerTable.o
