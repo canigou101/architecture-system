@@ -12,11 +12,8 @@ int main(int argc, char** argv){
         fprintf(stderr,"usage : \n\t%s REPERTOIRE\n", argv[0] );
         exit(EXIT_FAILURE);
     }
-    int nbC=0;
-    char* valeurColonne;
     char nomFichier[30];
     char nomFichierMeta[30];
-    char* nomFichierTypes = "Types/meta.txt";
     sprintf(nomFichier, "%s/data.txt", argv[1]);
     sprintf(nomFichierMeta, "%s/meta.txt", argv[1]);
     char* mes_params[]={"test","-f",nomFichier,(char*)NULL};
@@ -39,44 +36,59 @@ int main(int argc, char** argv){
                 execv("/usr/bin/touch",mesParam2);
             }
         }else{
-            FILE* fich = fopen(nomFichier,"w");
-            FILE* fichMeta = fopen(nomFichierMeta, "w");
-            FILE* fichTypes = fopen(nomFichierTypes, "w");
-            char ligne[30];
+            FILE* fichMeta = fopen(nomFichierMeta, "r");
             char ligneMeta[30];
             int nbC = 0;
             fgets(ligneMeta, 30, fichMeta);
             for (size_t i=0; i<strlen(ligneMeta);i++){
                 if (ligneMeta[i] != 13 && ligneMeta[i] != 10) nbC = nbC*10 + (ligneMeta[i]-'0');
             }
-            char Code[4];
-            int indic =0;
-            metaType Donnees;
-            fgets(Donnees.code, 30, fichTypes);
-            strncpy(Donnees.code, Donnees.code, strcspn(Donnees.code,' '));
+            //char* Code = (char*)malloc(*sizeof(char));
+            char* Code = "test";
+            int indic = 0;
+            metaType** verifType = (metaType**)malloc(sizeof(metaType*));
             for(int j = 0; j<nbC; j++){
-                printf("Quelle est la valeur de la %de colonne?\nElle sera considérée comme un(e) %s et devra faire moins de %s caractères ", j+1,,);
-                scanf("%s",&valeurColonne);
                 fgets(ligneMeta, 30, fichMeta);
-                for(int i=0; i<strlen(ligneMeta);i++){
+                for(size_t i=0; i<strlen(ligneMeta);i++){
                     if(indic==1) strcat(Code,&ligneMeta[i]);
                     if(ligneMeta[i]== ' ' || i<3) indic =1;
                 }
                 indic =0;
-                metaType** verifType = recupererType(Code);
-                if (verifType = (metaType**)NULL){
-                    printf("Le code indiqué dans le fichier meta n'existe pas.")
-                    return EXIT_FAILURE
+                verifType = recupererType("1");
+                printf("%s", (*verifType)->code);
+                /*if (strcpy((*verifType)->code, " ")==0){
+                    printf("Le code indiqué dans le fichier meta n'existe pas.");
+                    return EXIT_FAILURE;
                 }
-                printf("%s", (*truc)->type);
-                //free(truc);
-                char nomC[sizeof(tC)];
-                printf("Quelle est son nom? ");
-                scanf("%s", nomC);
-                fprintf(fich, "\n%s %d",nomC, tC);
+                size_t tailleInt = 0;
+                for (size_t k=0; k<strlen((*verifType)->taille);k++){
+                    if ((*verifType)->taille[k] != 13 && (*verifType)->taille[k] != 10) tailleInt = tailleInt*10 + ((*verifType)->taille[k]-'0');
+                }
+                char valeurColonne[tailleInt];
+                printf("Quelle est la valeur de la %de colonne?\nElle sera considérée comme un(e) %s et devra faire moins de %s caractères ", j+1,(*verifType)->type,(*verifType)->taille);
+                scanf("%s",valeurColonne);
+                if(strlen(valeurColonne)<=tailleInt){
+                    FILE* fich = fopen(nomFichier,"w");
+                    fprintf(fich, "%s\n",valeurColonne);
+                    fclose(fich);
+                }else{
+                    printf("La valeur est trop grande, veuillez diminuer son nombre de caractères ou changer le code indiqué dans le fichier meta.");
+                    return EXIT_FAILURE;
+                }*/
+               free(verifType);
             }
-            fclose(fich);
             return mon_Code;
         }  
     }
 }
+
+/*
+int main(){
+    metaType** truc = (metaType**)malloc(sizeof(metaType*));
+    char* test = (char*)malloc(5*sizeof(char));
+    test = "1";
+    truc = recupererType(test);
+    printf("%s", (*truc)->type);
+    free(truc);
+    return 0;
+}*/
